@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+	<package name="default" namespace="/" extends="struts-default">
+		<!-- <interceptors>
+			<interceptor name="logininterceptor" class="interceptor.LoginInterceptor"></interceptor>
+		</interceptors> -->
+		<!-- <action name="register" class="Action.userRegisterAction" method="register">
+			<result name="success" >/jsp/index.jsp</result>
+			<result name="input" >/jsp/index.jsp</result>
+		</action> -->
+		<action name="login" class="Action.userLoginAction" method="login">
+			<result name="success" type="redirect">/jsp/index.jsp</result>
+			<result name="input" >/jsp/index.jsp</result>
+		</action>
+		<!-- <action name="logout" class="Action.userLogoutAction">
+			<result name="success" type="redirect">/jsp/index.jsp</result>
+		</action> -->
+	</package>
+	<package name="ajax" namespace="/" extends="json-default">
+		<action name="load" class="Action.dataAction" method="load">
+			<!-- <result name="success" type="json">/jsp/index.jsp</result> -->
+		</action>
+		
+		<!-- 异步登录 -->
+		<!-- <action name="login" class="Action.userLoginAction" method="login"></action> -->
+		<!-- 异步退出 -->
+		<action name="logout" class="Action.userLogoutAction" method="logout"></action>
+		<!-- 异步注册 -->
+		<action name="register" class="Action.userRegisterAction" method="register"></action>
+		<action name="delete" class="Action.dataAction" method="delete"></action>
+		<action name="like" class="Action.dataAction" method="like"></action>
+		<action name="share" class="Action.shareAction">
+			<result name="success" type="redirect">/jsp/index.jsp</result>
+		</action>
+	</package>
+	
+</struts>    
