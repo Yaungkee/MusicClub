@@ -249,14 +249,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!-- 音乐搜索结果列表 -->
 	<div id="resultdiv" ><!-- class="layui-bg-green" -->
 		<span id="musiclist"style="text-align:left;">
-			<ul class="songlist">
+			<ul id="songlist">
 		  		<li v-for="(song,songindex) in musicList" v-cloak>
 		  			<div>
 			  			<a href="javascript:;" @click="playMusic(song.id)" class="layui-icon layui-icon-play"></a>
 			  			<b v-for="(artists,index) in song.artists">{{artists.name}} </b>
 			  			<b>-&nbsp;</b>
 			  			<b>{{song.name}}</b>
+			  			<b v-for="alia in song.alias" style="color:#323232">{{alia}}</b>
 			  			<a href="javascript:;" @click="share(song.id,song.artists,song.name)" id="share" class="layui-icon layui-icon-share" style="position:absolute;right:0"></a>
+		  			</div>
+		  		</li>
+	  		</ul>
+	  		<ul id="hotsong">
+		  		<li v-for="(song,songindex) in hotmusicList" v-cloak>
+		  			<div>
+			  			<a href="javascript:;" @click="playMusic(song.id)" class="layui-icon layui-icon-play"></a>
+			  			<b v-for="(artists,index) in song.ar">{{artists.name}} </b>
+			  			<b>-&nbsp;</b>
+			  			<b>{{song.name}}</b>
+			  			<b v-for="alia in song.alia" style="color:#323232">{{alia}}</b>
+			  			<a href="javascript:;" @click="share(song.id,song.ar,song.name)" id="share" class="layui-icon layui-icon-share" style="position:absolute;right:0"></a>
 		  			</div>
 		  		</li>
 	  		</ul>
@@ -314,6 +327,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	data:{
 	  		query:"",
 	  		musicList:[],
+	  		hotmusicList:[],
 	  		artistsList:[],
 	  		musicid:"",
 	  		musicname:"",
@@ -326,13 +340,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  	},
 	  	methods:{
 	  		searchMusic:function(){
+	  			document.getElementById("songlist").style.display="none";
+	  			document.getElementById("hotsong").style.display="none";
 	  			var that=this;
 	  			$.get(
-	  				"https://autumnfish.cn/search?keywords="+that.query+"&limit=50",
+	  				"https://autumnfish.cn/search?keywords="+that.query+"&limit=100",
 	  				function(response){
 		  				that.musicList=response.result.songs;
-		  				/* console.log(that.musicList); */
-	  				})
+	  				}
+	  			);
+	  			document.getElementById("songlist").style.display="block";
 	  		},
 	  			/* axios.get("https://autumnfish.cn/search?keywords="+this.query)
 	  			.then(function(response){
@@ -350,7 +367,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			$.get(
 		  			"https://autumnfish.cn/song/url?id="+musicId,
 		  			function(response){
-		  				console.log(response);
 		  				that.musicUrl=response.data[0].url;
 		  				if(that.musicUrl==null){
 		  					alert("此曲要收费，暂时播放不了！");
@@ -427,6 +443,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				}
 	  		},
 	  		loaddata:function(){
+	  			document.getElementById("songlist").style.display="none";
 	  			var that=this;
 	  			var username="${sessionScope.username}";
 		    	if(username!=""){
@@ -434,7 +451,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				    document.getElementById("register").style.display="none";
 				    document.getElementById("userinfo").style.display="inline-block";
 		    	}
-		    	 
+		    	
 	  			$.post(
     			"load",
     			function(result){
@@ -444,6 +461,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     					console.log(this.commentid+"  "+this.username+"  "+this.comment+"  "+this.create_dt+"  "+this.like);
     				}) */
     			},"json");
+    			
+    			$.get(
+    				"https://autumnfish.cn/top/list?idx=1",
+    				function(response){
+		  				that.hotmusicList=response.playlist.tracks;
+		  				that.hotmusicList.length=100;
+		  			}
+    			);
 	  		},
 	  		deletecomment:function(index,username,commentid){
 	  			/* var that=this;  */
