@@ -1,14 +1,3 @@
-body {
-    /* text-align: center; */
-    /* background-color: burlywood; */
-    background-color:#525252;
-}
-/* #displaysign{
-    position: relative;
-    top: 80px;
-    width: 70px;
-    height: 40px;
-} */
 .signform {
     font-family: Î¢ÈíÑÅºÚ;
     position: fixed;
@@ -35,13 +24,6 @@ body {
     margin-top: 10px;
     margin-right: 10px;
 }
-/* #registerloading{
-    position: absolute;
-    width: 25px;
-    height: 25px;
-    left: 410px;
-    top: 90px;
-} */
 .signinput {
     text-align: center;
     border-radius: 0.2em;

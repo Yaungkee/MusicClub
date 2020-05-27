@@ -83,11 +83,13 @@
 					"register",
 					{"registeruser":registeruser,"registerpwd":registerpwd},
 					function(result){
-						if(result=="success")alert("注册成功!");
+						if(result=="success"){
+							alert("注册成功!");
+							document.getElementById("registerform").style.display="none";
+							document.getElementById("signform").style.display="block";
+						}
 						else alert("用户已存在！");
 					}
 			)
-			document.getElementById("registerform").style.display="none";
-			document.getElementById("signform").style.display="block";
 		}
 	}

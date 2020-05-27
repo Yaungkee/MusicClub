@@ -7,10 +7,12 @@ $(function ()//×¢²áµÇÂ¼´°¿ÚÇÐ»»
 })
 /*µÇÂ½×¢²á´°¿Ú*/
 function login(){
+	document.getElementById('registerform').style.display="none";
 	document.getElementById('signform').style.display="block";
 }
 function register() {
 	document.getElementById('registerform').style.display="block";
+	document.getElementById('signform').style.display="none";
 }
 function signclose() {
     document.getElementById('signform').style.display="none";
