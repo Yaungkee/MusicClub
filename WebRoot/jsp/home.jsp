@@ -19,10 +19,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	  <script src="js/jquery.min.js"></script>
+	  <script type="javascript">
+		  window.onload=function(){
+			  	console.log(1);
+		  }
+	  </script>
   </head>
   
 	<body>
-	 	 我的主页<br>
+	 	 <button id="load">我的主页</button>
 	</body>
 </html>

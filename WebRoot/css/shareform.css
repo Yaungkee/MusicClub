@@ -10,7 +10,7 @@
     z-index: 1;
 }
 #sharecomment{
-	border-radius: 0.7em;
+    padding: 5px;
 	width: 280px;
     height: 45px;
     border: none;
@@ -18,7 +18,6 @@
     font-size: 18px;
     width:100%;
 	height:50%;
-	/* maxlength:180; */
     resize:none;
 }
 .shareclose {
